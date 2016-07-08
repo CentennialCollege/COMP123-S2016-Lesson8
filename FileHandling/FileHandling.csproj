@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0975029B-A3A8-4B9F-A11C-9B533DE3A53F}</ProjectGuid>
+    <ProjectGuid>{D4EB164B-5FF2-43EB-93D3-9EE3FBA9498B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>COMP123_S2016_Lesson8</RootNamespace>
-    <AssemblyName>COMP123-S2016-Lesson8</AssemblyName>
+    <RootNamespace>FileHandling</RootNamespace>
+    <AssemblyName>FileHandling</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,12 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ProjectDiagram.cd" />
+    <None Include="FileHandlingDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="employee.txt" />
+    <Content Include="myfile.txt" />
+    <Content Include="somefile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
