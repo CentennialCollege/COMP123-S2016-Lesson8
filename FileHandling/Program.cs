@@ -12,38 +12,53 @@ namespace FileHandling
     {
         static void Main(string[] args)
         {
-            Employee employee = new Employee();
-            string myfile = "..\\..\\myfile.txt";
-            string directoryName = "..\\..\\Models";
-            string[] listOfFiles;
+            try
+            {
+                List<Employee> employees = new List<Employee>();
+                
+                const string FILENAME = "..\\..\\employee.txt";
+                const char DELIM = ',';
 
-            if(File.Exists(myfile))
-            {
-                Console.WriteLine("Created: " + File.GetCreationTime(myfile));
-            }
-            else
-            {
-                Console.WriteLine("File does not exist");
-            }
+                // opening filestream
+                FileStream inFile = new FileStream(FILENAME, FileMode.Open, FileAccess.Read);
+                StreamReader reader = new StreamReader(inFile);
 
-            if(Directory.Exists(directoryName))
-            {
-                listOfFiles = Directory.GetFiles(directoryName);
-                for (int file = 0; file < listOfFiles.Length; file++)
+                // setup variables to temporariliy hold my data
+                string recordString;
+                string[] fields;
+
+                // read from file and assign the record to recordIN
+                recordString = reader.ReadLine();
+
+                while(recordString != null)
                 {
-                    Console.WriteLine("    " + listOfFiles[file]);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Dicrectory does not exist");
-            }
+                    Employee employee = new Employee();
+                    fields = recordString.Split(DELIM);
+                    employee.EmployeeID = Convert.ToInt32(fields[0]);
+                    employee.FirstName = fields[1];
+                    employee.LastName = fields[2];
+                    employee.Salary = Convert.ToDouble(fields[3]);
+                    employees.Add(employee);
 
-            FileStream outFile = new FileStream("..\\..\\somefile.txt", FileMode.Create, FileAccess.Write);
-            StreamWriter writer = new StreamWriter(outFile);
-            writer.WriteLine("Hello World!");
-            writer.Close();
-            outFile.Close();
+                    Console.WriteLine("{0} {1} {2} {3}",
+                        employee.EmployeeID, 
+                        employee.FirstName, 
+                        employee.LastName,
+                        employee.Salary.ToString("C"));
+
+                    recordString = reader.ReadLine();
+                }
+
+                // close streams
+                reader.Close();
+                inFile.Close();
+            }
+            catch (Exception exception)
+            {
+
+                Console.WriteLine("Error: " + exception.Message);
+            }
+            
         }
     }
 }
